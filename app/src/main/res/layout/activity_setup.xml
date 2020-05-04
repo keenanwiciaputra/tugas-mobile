@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroundDark"
+    tools:context=".SetupActivity">
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/setup_profile"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="104dp"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/pp" />
+
+
+    <LinearLayout
+        android:id="@+id/layout_setup"
+        android:layout_below="@+id/setup_profile"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/setup_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        android:ems="10"
+        android:hint="Username"
+        android:textColor="@color/whiteFont"
+        android:textColorHint="#a6a6a6"
+        android:background="@drawable/borderbottom"
+        android:inputType="textMultiLine" />
+
+    <EditText
+        android:id="@+id/setup_fullname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="Full Name"
+        android:textColor="@color/whiteFont"
+        android:textColorHint="#a6a6a6"
+        android:background="@drawable/borderbottom"
+        android:inputType="textMultiLine" />
+
+    <EditText
+        android:id="@+id/setup_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="Description"
+        android:textColor="@color/whiteFont"
+        android:textColorHint="#a6a6a6"
+        android:background="@drawable/borderbottom"
+        android:inputType="textMultiLine" />
+
+
+        <EditText
+            android:id="@+id/setup_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:ems="10"
+            android:hint="Location Unknown"
+            android:textColor="@color/whiteFont"
+            android:textColorHint="#a6a6a6"
+            android:background="@drawable/borderbottom"
+            android:inputType="textMultiLine" />
+
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/button1"
+            android:textColor="#ffffff"
+            android:text="SAVE"
+            android:layout_marginTop="70dp"/>
+
+    </LinearLayout>
+
+</RelativeLayout>
