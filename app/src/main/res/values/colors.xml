@@ -10,4 +10,15 @@
     <color name="greyFont">#C8C8C8</color>
     <color name="whiteFont">#FFFFFF</color>
     <color name="lightgrey">#969696</color>
+
+    <color name="colorBackground">#0D0D0D</color>
+    <color name="colorPrimaryLight">#248ff1</color>
+    <color name="colorPrimaryDarkLight">#173144</color>
+    <color name="colorWhite">#FFF</color>
+    <color name="colorDarkLine">#0c1217</color>
+    <color name="colorDarkLineDarker">#05080a</color>
+    <color name="colorLightGrey">#d4e9fc</color>
+    <color name="colorLightGreyTransparent">#99d4e9fc</color>
+    <color name="colorRedLight">#FFffa3c4</color>
+    <color name="colorRed">#FFd8004e</color>
 </resources>
