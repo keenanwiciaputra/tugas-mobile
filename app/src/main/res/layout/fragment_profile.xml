@@ -177,7 +177,6 @@
                 android:gravity="center"
                 android:scaleType="fitXY"
                 android:src="@drawable/logout"
-
                 />
 
 
