@@ -1,25 +1,229 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NotificationFragment"
-    >
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_gravity="center"
-        android:src="@drawable/profile"
-        />
+    android:background="@color/backgroundDark"
+    tools:context=".NotificationFragment">
 
-    <Button
-        android:id="@+id/btnLogout"
+    <RelativeLayout
+        android:id="@+id/scrollProfile"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="@drawable/button1"
-        android:textColor="#ffffff"
-        android:text="LOGOUT"
-        android:layout_marginTop="70dp"/>
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/userHeadline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="8dp"
+            android:fillViewport="true">
+
+            <RelativeLayout
+                android:id="@+id/banner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:layout_editor_absoluteX="8dp"
+                tools:layout_editor_absoluteY="0dp">
+
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="40dp"
+                    android:background="#FFFFFF"
+                    android:backgroundTint="@color/colorBackground"
+                    android:elevation="12dp"
+                    android:scaleType="centerCrop"
+                    app:srcCompat="@drawable/profile_picture" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlUserP"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/banner"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="4dp">
+
+                <TextView
+                    android:id="@+id/tvUserNameP"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Full Name"
+                    android:textColor="#28D8A1"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvScreenNameP"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvUserNameP"
+                    android:layout_alignParentStart="true"
+                    android:text="username"
+                    android:textColor="@color/colorLightGrey"
+                    android:textSize="16sp"
+                    android:textStyle="italic" />
+
+
+                <ImageView
+                    android:id="@+id/calendar"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="67dp"
+                    android:visibility="visible"
+                    app:srcCompat="@drawable/calendar" />
+
+                <TextView
+                    android:id="@+id/tvUserDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvScreenNameP"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="13dp"
+                    android:autoLink="all"
+                    android:text="Joined 12/04/2020"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="16sp" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/lUserFollows"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rlUserP"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+
+                    <TextView
+                        android:id="@+id/tvFollowingsCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="@color/whiteFont"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tvFollowings"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:text="Following"
+                        android:textColor="@color/greyFont"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="48dp">
+
+                    <TextView
+                        android:id="@+id/tvFollowersCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="@color/whiteFont"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tvFollowers"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:text="Followers"
+                        android:textColor="@color/greyFont"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <ImageButton
+                android:id="@+id/editButton"
+                android:layout_width="130dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="330dp"
+                android:layout_marginLeft="50dp"
+                android:background="@android:color/transparent"
+                android:gravity="center"
+                android:scaleType="fitXY"
+                android:src="@drawable/editbutton" />
+            <ImageButton
+                android:id="@+id/btnLogout"
+                android:layout_width="130dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="330dp"
+                android:layout_marginLeft="230dp"
+                android:background="@android:color/transparent"
+                android:gravity="center"
+                android:scaleType="fitXY"
+                android:src="@drawable/logout"
+
+                />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/lMainSeparator"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_below="@id/userHeadline"
+            android:layout_marginTop="15dp"
+            android:background="#3D3D3D">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0.8dp"
+                android:background="@color/colorDarkLineDarker" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0.3dp"
+                android:layout_alignParentBottom="true"
+                android:background="@color/colorDarkLineDarker" />
+        </RelativeLayout>
+
+    </RelativeLayout>
 
 </FrameLayout>
+
+
+
+
+
+    <!--    <ImageView-->
+<!--        android:id="@+id/imageView"-->
+<!--        android:layout_width="200dp"-->
+<!--        android:layout_height="200dp"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:src="@drawable/profile"-->
+<!--        />-->
+
+<!--    <Button-->
+<!--        android:id="@+id/btnLogout"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="40dp"-->
+<!--        android:background="@drawable/button1"-->
+<!--        android:textColor="#ffffff"-->
+<!--        android:text="LOGOUT"-->
+<!--        android:layout_marginTop="70dp"/>-->
