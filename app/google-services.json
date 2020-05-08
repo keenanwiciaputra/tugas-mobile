@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "690699754700",
+    "firebase_url": "https://socialdistancing-b2c9c.firebaseio.com",
+    "project_id": "socialdistancing-b2c9c",
+    "storage_bucket": "socialdistancing-b2c9c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:690699754700:android:f2dac864b9c5bcdc26b669",
+        "android_client_info": {
+          "package_name": "umn.ac.id.tugasmobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "690699754700-ltoap5fj7jtp853v5qltns3i0lia16dh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "umn.ac.id.tugasmobile",
+            "certificate_hash": "d43c8fdc78bc41654ba4a876e7225138dada0b05"
+          }
+        },
+        {
+          "client_id": "690699754700-9t2sk14qcrn2vu3h0lkup3er0a6bb1vk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCkHg-zIIt2PfGl4IZXIeXF5Ik6OUoD4zk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "690699754700-9t2sk14qcrn2vu3h0lkup3er0a6bb1vk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
