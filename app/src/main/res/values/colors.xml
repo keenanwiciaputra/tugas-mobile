@@ -3,4 +3,11 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="buttonLabel">#FFFFFF</color>
+    <color name="tosca">#28D8A1</color>
+    <color name="backgroundDark">#0D0D0D</color>
+    <color name="greyForm">#282828</color>
+    <color name="greyFont">#C8C8C8</color>
+    <color name="whiteFont">#FFFFFF</color>
+    <color name="lightgrey">#969696</color>
 </resources>

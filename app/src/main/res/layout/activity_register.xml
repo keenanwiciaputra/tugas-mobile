@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegisterActivity"
+    android:background="@color/backgroundDark">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="150px"
+        android:background="@drawable/borderbottom">
+        <ImageView
+            android:id="@+id/logo"
+            android:src="@drawable/logo2"
+            android:layout_width="match_parent"
+            android:layout_height="70px"
+            android:layout_marginTop="35px"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/layout1"
+        android:layout_marginLeft="80px"
+        android:layout_marginRight="80px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="300px"
+            android:textStyle="bold"
+            android:text="Sign Up"
+            android:textColor="@color/whiteFont"
+            android:textSize="70px"
+            />
+
+        <EditText
+            android:id="@+id/register_email"
+            android:layout_width="match_parent"
+            android:layout_height="150px"
+            android:layout_below="@id/login"
+            android:textColor="@color/whiteFont"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:textColorHint="#a6a6a6"
+            android:background="@drawable/borderbottom"/>
+
+        <EditText
+            android:id="@+id/register_password"
+            android:layout_width="match_parent"
+            android:layout_height="150px"
+            android:layout_below="@id/register_email"
+            android:textColor="@color/whiteFont"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:textColorHint="#a6a6a6"
+            android:background="@drawable/borderbottom"/>
+
+        <EditText
+            android:id="@+id/register_confpass"
+            android:layout_width="match_parent"
+            android:layout_height="150px"
+            android:layout_below="@id/register_password"
+            android:textColor="@color/whiteFont"
+            android:hint="Confirm Password"
+            android:inputType="textPassword"
+            android:textColorHint="#a6a6a6"
+            android:background="@drawable/borderbottom"/>
+
+        <Button
+            android:id="@+id/btnSignup"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/button1"
+            android:textColor="#ffffff"
+            android:text="SIGN UP"
+            android:layout_marginTop="80px"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout2"
+        android:layout_marginLeft="80px"
+        android:layout_marginRight="80px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/layout1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80px"
+            android:text="Already have an account? "
+            android:textColor="@color/whiteFont"
+            />
+        <TextView
+            android:id="@+id/btnLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80px"
+            android:text="Login here"
+            android:textColor="#54bf99"
+            />
+
+    </LinearLayout>
+
+</RelativeLayout>
