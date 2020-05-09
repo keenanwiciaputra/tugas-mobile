@@ -4,7 +4,8 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="buttonLabel">#FFFFFF</color>
-    <color name="tosca">#28D8A1</color>
+    <color name="tosca">#21b083</color>
+    <color name="darktosca">#18805f</color>
     <color name="backgroundDark">#0D0D0D</color>
     <color name="greyForm">#282828</color>
     <color name="greyFont">#C8C8C8</color>
@@ -20,5 +21,6 @@
     <color name="colorLightGrey">#d4e9fc</color>
     <color name="colorLightGreyTransparent">#99d4e9fc</color>
     <color name="colorRedLight">#FFffa3c4</color>
-    <color name="colorRed">#FFd8004e</color>
+    <color name="colorRed">#d92e3f</color>
+    <color name="colorDarkRed">#a12a2a</color>
 </resources>

@@ -1,16 +1,30 @@
 package umn.ac.id.tugasmobile;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
+
+import org.w3c.dom.Text;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileFragment extends Fragment implements View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
@@ -21,7 +35,18 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     private String mParam1;
     private String mParam2;
 
-    private ImageButton btnLogout;
+    private Button btnLogout;
+    private Button btnEditProfile;
+
+    private TextView username, fullname, desc, location;
+    private CircleImageView profilepic;
+
+    private DatabaseReference profileUserRef;
+    private FirebaseAuth mAuth;
+
+    private String currentUserId;
+
+
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -51,12 +76,64 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
             mParam2 = getArguments().getString(ARG_PARAM2);
 
         }
+
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_profile, container, false);
+
+
+
+        mAuth = FirebaseAuth.getInstance();
+        currentUserId = mAuth.getCurrentUser().getUid();
+        profileUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserId);
+
+
+        username = (TextView) v.findViewById(R.id.tvUserNameP);
+        fullname = (TextView) v.findViewById(R.id.tvScreenNameP);
+        desc = (TextView) v.findViewById(R.id.tvDescP);
+        location = (TextView) v.findViewById(R.id.tvUserLocationP);
+        profilepic = (CircleImageView) v.findViewById(R.id.ProfileImage);
+
+        profileUserRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists())
+                {
+                    String myprofilepic = dataSnapshot.child("profileimage").getValue().toString();
+                    String mylocation = dataSnapshot.child("location").getValue().toString();
+                    String mydesc = dataSnapshot.child("desc").getValue().toString();
+                    String myfullname = dataSnapshot.child("fullname").getValue().toString();
+                    String myusername = dataSnapshot.child("username").getValue().toString();
+
+                    Picasso.get().load(myprofilepic).placeholder(R.drawable.profile).into(profilepic);
+
+                    username.setText("@" + myusername);
+                    fullname.setText(myfullname);
+                    desc.setText(mydesc);
+                    location.setText(mylocation);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        btnEditProfile = v.findViewById(R.id.btnEditProfile);
+        btnEditProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setClass(getActivity(), EditProfileActivity.class);
+                getActivity().startActivity(intent);
+            }
+        });
+
         btnLogout = v.findViewById(R.id.btnLogout);
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
