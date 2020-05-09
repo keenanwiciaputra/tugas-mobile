@@ -7,7 +7,7 @@
     <item
         android:id="@+id/navigation_search"
         android:icon="@drawable/search"
-        android:title="SMS" />
+        android:title="Search" />
     <item
         android:id="@+id/navigation_notifications"
         android:icon="@drawable/notif"
@@ -15,5 +15,5 @@
     <item
         android:id="@+id/navigation_profile"
         android:icon="@drawable/profile"
-        android:title="Notification" />
+        android:title="Profile" />
 </menu>
