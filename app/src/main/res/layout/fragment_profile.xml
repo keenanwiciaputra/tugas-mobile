@@ -27,8 +27,8 @@
                 tools:layout_editor_absoluteY="0dp">
 
 
-                <ImageView
-                    android:id="@+id/imageView"
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/ProfileImage"
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     android:layout_marginStart="20dp"
@@ -51,7 +51,7 @@
                 android:paddingTop="4dp">
 
                 <TextView
-                    android:id="@+id/tvUserNameP"
+                    android:id="@+id/tvScreenNameP"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Full Name"
@@ -60,39 +60,73 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/tvScreenNameP"
+                    android:id="@+id/tvUserNameP"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/tvUserNameP"
+                    android:layout_below="@+id/tvScreenNameP"
                     android:layout_alignParentStart="true"
                     android:text="username"
                     android:textColor="@color/colorLightGrey"
                     android:textSize="16sp"
                     android:textStyle="italic" />
+                <TextView
+                    android:id="@+id/tvDescP"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvUserNameP"
+                    android:layout_alignParentStart="true"
+                    android:text="description"
+                    android:textColor="#FFF"
+                    android:textSize="16sp"
+                    android:layout_marginTop="10dp"/>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_below="@+id/tvDescP"
+                    android:layout_marginTop="10dp">
+                    <ImageView
+                        android:id="@+id/location"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:visibility="visible"
+                        app:srcCompat="@drawable/location" />
 
+                    <TextView
+                        android:id="@+id/tvUserLocationP"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginStart="5dp"
+                        android:autoLink="all"
+                        android:text="Jakarta, Indonesia"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="16sp" />
                 <ImageView
                     android:id="@+id/calendar"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
-                    android:layout_marginTop="67dp"
                     android:visibility="visible"
+                    android:layout_marginStart="20dp"
                     app:srcCompat="@drawable/calendar" />
 
                 <TextView
                     android:id="@+id/tvUserDescription"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tvScreenNameP"
                     android:layout_alignParentStart="true"
-                    android:layout_marginStart="30dp"
-                    android:layout_marginTop="13dp"
+                    android:layout_marginStart="5dp"
                     android:autoLink="all"
                     android:text="Joined 12/04/2020"
                     android:textColor="@color/colorWhite"
                     android:textSize="16sp" />
+                </LinearLayout>
 
             </RelativeLayout>
 
@@ -116,7 +150,7 @@
                         android:id="@+id/tvFollowingsCount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="0"
+                        android:text="784"
                         android:textColor="@color/whiteFont"
                         android:textSize="16sp" />
 
@@ -134,13 +168,13 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="48dp">
+                    android:layout_marginLeft="20dp">
 
                     <TextView
                         android:id="@+id/tvFollowersCount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="0"
+                        android:text="566"
                         android:textColor="@color/whiteFont"
                         android:textSize="16sp" />
 
@@ -157,28 +191,37 @@
 
             </LinearLayout>
 
-            <ImageButton
-                android:id="@+id/editButton"
-                android:layout_width="130dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="330dp"
-                android:layout_marginLeft="50dp"
-                android:background="@android:color/transparent"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lUserFollows"
                 android:gravity="center"
-                android:scaleType="fitXY"
-                android:src="@drawable/editbutton" />
-            <ImageButton
-                android:id="@+id/btnLogout"
-                android:layout_width="130dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="330dp"
-                android:layout_marginLeft="230dp"
-                android:background="@android:color/transparent"
-                android:gravity="center"
-                android:scaleType="fitXY"
-                android:src="@drawable/logout"
-                
-                />
+                android:orientation="horizontal"
+                android:layout_marginTop="12dp">
+
+                <Button
+                    android:id="@+id/btnEditProfile"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edit_profile_button"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:scaleType="fitXY"
+                    android:text="Edit Profile"
+                    android:textColor="#ffffff" />
+
+                <Button
+                    android:id="@+id/btnLogout"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="35dp"
+                    android:background="@drawable/logout_button"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:scaleType="fitXY"
+                    android:text="Logout"
+                    android:textColor="#ffffff" />
+            </LinearLayout>
 
 
         </RelativeLayout>
