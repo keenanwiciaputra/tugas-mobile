@@ -41,10 +41,10 @@
             android:src="@drawable/floating_button"
             android:contentDescription="FAB"
             android:backgroundTint="@color/tosca"
-            app:fabCustomSize="65dp"
-            app:maxImageSize="35dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginBottom="85dp"/>
+            app:fabSize="normal"
+            app:maxImageSize="30dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="70dp"/>
     </FrameLayout>
 
 </androidx.drawerlayout.widget.DrawerLayout>

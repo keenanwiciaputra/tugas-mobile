@@ -6,8 +6,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -34,6 +36,7 @@ import com.squareup.picasso.Picasso;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Random;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -44,6 +47,7 @@ public class PostActivity extends AppCompatActivity {
     private Button btnPost;
     private EditText postDesc;
     private static final int Gallery_Pick = 1;
+    static final int REQUEST_IMAGE_CAPTURE = 1;
     private Uri imageUri, resultUri;
     private ImageView postImage;
     private String desc, saveCurrentDate, saveCurrentTime, postRandomName, downloadUrl;
@@ -94,6 +98,13 @@ public class PostActivity extends AppCompatActivity {
             }
         });
 
+        openCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                OpenCamera();
+            }
+        });
+
         cancelPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -121,6 +132,7 @@ public class PostActivity extends AppCompatActivity {
             }
         });
     }
+
 
     private void ValidatePostInfo()
     {
@@ -155,7 +167,10 @@ public class PostActivity extends AppCompatActivity {
         SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm");
         saveCurrentTime = currentTime.format(getTime.getTime());
 
-        postRandomName = saveCurrentDate + saveCurrentTime;
+        Random rand = new Random();
+        int randPost = rand.nextInt(1000);
+
+        postRandomName = saveCurrentDate + saveCurrentTime + randPost;
 
         final StorageReference filepath = imageRef.child("Post Images").child(imageUri.getLastPathSegment() + postRandomName + ".jpg");
 
@@ -253,6 +268,14 @@ public class PostActivity extends AppCompatActivity {
         galleryIntent.setType("image/*");
         startActivityForResult(galleryIntent, Gallery_Pick);
     }
+//
+//    private void OpenCamera() {
+//        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+//            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+//        }
+//    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data)
@@ -264,5 +287,11 @@ public class PostActivity extends AppCompatActivity {
             imageUri = data.getData();
             postImage.setImageURI(imageUri);
         }
+
+//        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+//            Bundle extras = data.getExtras();
+//            Bitmap imageBitmap = (Bitmap) extras.get("data");
+//            imageView.setImageBitmap(imageBitmap);
+//        }
     }
 }

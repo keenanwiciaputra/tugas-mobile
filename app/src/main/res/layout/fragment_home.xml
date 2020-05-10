@@ -5,10 +5,13 @@
     android:layout_height="match_parent"
     tools:context=".HomeFragment"
     >
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/all_users_post_list"
         android:scrollbars="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:paddingBottom="150px">
     </androidx.recyclerview.widget.RecyclerView>
+
 </FrameLayout>
