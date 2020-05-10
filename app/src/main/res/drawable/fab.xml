@@ -1,0 +1,13 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:innerRadius="0dp"
+    android:shape="ring"
+    android:thicknessRatio="2"
+    android:useLevel="false" >
+
+    <!--Here if you want to set transparent can set-->
+    <solid android:color="@color/tosca" />
+
+    <!--Here you can set your fab button border color-->
+    <stroke
+        android:color="@color/tosca" />
+</shape>

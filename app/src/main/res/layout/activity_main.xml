@@ -41,6 +41,7 @@
             android:src="@drawable/floating_button"
             android:contentDescription="FAB"
             android:backgroundTint="@color/tosca"
+            app:borderWidth="0dp"
             app:fabSize="normal"
             app:maxImageSize="30dp"
             android:layout_marginRight="20dp"
