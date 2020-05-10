@@ -1,20 +1,26 @@
 package umn.ac.id.tugasmobile;
 
 import android.content.Context;
+import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.ContentFrameLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextSwitcher;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -44,6 +50,7 @@ public class HomeFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private ImageView homeImage;
 
     private RecyclerView postList;
     private FirebaseAuth mAuth;
@@ -90,7 +97,6 @@ public class HomeFragment extends Fragment {
         usersRef = FirebaseDatabase.getInstance().getReference().child("Users");
         postsRef = FirebaseDatabase.getInstance().getReference().child("Posts");
 
-
         postList = (RecyclerView) v.findViewById(R.id.all_users_post_list);
         postList.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
@@ -107,7 +113,7 @@ public class HomeFragment extends Fragment {
     public void onStart() {
         super.onStart();
     }
-//
+
 //    @Override
 //    public void onStop() {
 //        super.onStop();
@@ -133,6 +139,8 @@ public class HomeFragment extends Fragment {
 
             @Override
             protected void onBindViewHolder(PostsViewHolder viewHolder, int position, Posts model) {
+                final String PostKey = getRef(position).getKey();
+
                 viewHolder.setUsername(model.getUsername());
                 viewHolder.setFullname(model.getFullname());
                 viewHolder.setTime(model.getTime());
@@ -140,6 +148,16 @@ public class HomeFragment extends Fragment {
                 viewHolder.setDescription(model.getDescription());
                 viewHolder.setProfileimage(model.getProfileimage());
                 viewHolder.setPostimage(model.getPostimage());
+
+                viewHolder.mView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent clickPostIntent = new Intent();
+                        clickPostIntent.setClass(getActivity(), ClickPostActivity.class);
+                        clickPostIntent.putExtra("PostKey", PostKey);
+                        getActivity().startActivity(clickPostIntent);
+                    }
+                });
             }
         };
         adapter.startListening();
@@ -198,4 +216,5 @@ public class HomeFragment extends Fragment {
             Picasso.get().load(postimage).into(PostImage);
         }
     }
+
 }
