@@ -1,14 +1,14 @@
 package umn.ac.id.tugasmobile;
 
 public class Posts {
-    public String uid, date, time, postimage, profileimage, description, fullname, username;
+    public String uid, date, time, postimage, profileimage, description, fullname, username, location;
 
     public Posts()
     {
 
     }
 
-    public Posts(String uid, String date, String time, String postimage, String profileimage, String description, String fullname, String username) {
+    public Posts(String uid, String date, String time, String postimage, String profileimage, String description, String fullname, String username, String location) {
         this.uid = uid;
         this.date = date;
         this.time = time;
@@ -17,6 +17,7 @@ public class Posts {
         this.description = description;
         this.fullname = fullname;
         this.username = username;
+        this.location = location;
     }
 
     public String getUid() {
@@ -81,6 +82,14 @@ public class Posts {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 }
 

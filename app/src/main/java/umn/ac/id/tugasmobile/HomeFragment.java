@@ -18,6 +18,7 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextSwitcher;
 import android.widget.TextView;
@@ -213,8 +214,7 @@ public class HomeFragment extends Fragment {
         postList.setAdapter(adapter);
     }
 
-    public static class PostsViewHolder extends RecyclerView.ViewHolder
-    {
+    public static class PostsViewHolder extends RecyclerView.ViewHolder {
         View mView;
 
         ImageButton LikeButton, CommentButton;
@@ -224,8 +224,7 @@ public class HomeFragment extends Fragment {
         DatabaseReference LikesRef;
         FirebaseAuth mAuth;
 
-        public PostsViewHolder(View itemView)
-        {
+        public PostsViewHolder(View itemView) {
             super(itemView);
             mView = itemView;
 
@@ -238,20 +237,15 @@ public class HomeFragment extends Fragment {
             currentUserId = mAuth.getCurrentUser().getUid();
         }
 
-        public void setLikeButtonStatus(final String postKey)
-        {
+        public void setLikeButtonStatus(final String postKey) {
             LikesRef.addValueEventListener(new ValueEventListener() {
                 @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot)
-                {
-                    if (dataSnapshot.child(postKey).hasChild(currentUserId))
-                    {
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.child(postKey).hasChild(currentUserId)) {
                         countLikes = (int) dataSnapshot.child(postKey).getChildrenCount();
                         LikeButton.setImageResource(R.drawable.like);
                         LikesCount.setText(Integer.toString(countLikes));
-                    }
-                    else
-                    {
+                    } else {
                         countLikes = (int) dataSnapshot.child(postKey).getChildrenCount();
                         LikeButton.setImageResource(R.drawable.dislike);
                         LikesCount.setText(Integer.toString(countLikes));
@@ -260,46 +254,39 @@ public class HomeFragment extends Fragment {
                 }
 
                 @Override
-                public void onCancelled(@NonNull DatabaseError databaseError){
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
                 }
             });
         }
 
 
-
-        public void setUsername(String username)
-        {
+        public void setUsername(String username) {
             TextView userName = (TextView) mView.findViewById(R.id.post_profile_username);
             userName.setText("@" + username);
         }
 
-        public void setFullname(String fullname)
-        {
+        public void setFullname(String fullname) {
             TextView fullName = (TextView) mView.findViewById(R.id.post_profile_fullname);
             fullName.setText(fullname);
         }
 
-        public void setProfileimage(String profileimage)
-        {
+        public void setProfileimage(String profileimage) {
             CircleImageView image = (CircleImageView) mView.findViewById(R.id.post_profile_image);
             Picasso.get().load(profileimage).into(image);
         }
 
-        public void setTime(String time)
-        {
+        public void setTime(String time) {
             TextView PostTime = (TextView) mView.findViewById(R.id.post_time);
             PostTime.setText("    " + time);
         }
 
-        public void setDate(String date)
-        {
+        public void setDate(String date) {
             TextView PostDate = (TextView) mView.findViewById(R.id.post_date);
             PostDate.setText("  -  " + date);
         }
 
-        public void setDescription(String description)
-        {
+        public void setDescription(String description) {
             TextView PostDescription = (TextView) mView.findViewById(R.id.post_description);
             PostDescription.setText(description);
         }
@@ -309,6 +296,7 @@ public class HomeFragment extends Fragment {
             ImageView PostImage = (ImageView) mView.findViewById(R.id.post_image);
             Picasso.get().load(postimage).into(PostImage);
         }
+
 
 
     }

@@ -8,4 +8,9 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="SwitchTheme" parent="Theme.AppCompat.Light">
+        <item name="colorControlActivated">@color/tosca</item>
+        <item name="colorControlNormal">@color/colorRedLight</item>
+        <item name="colorControlHighlight">@color/colorRed</item>
+    </style>
 </resources>
