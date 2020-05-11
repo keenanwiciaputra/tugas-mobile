@@ -10,10 +10,12 @@ import android.content.ContextWrapper;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.telephony.emergency.EmergencyNumber;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.MenuInflater;
@@ -39,6 +41,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class ClickPostActivity extends AppCompatActivity {
     private ImageView editImage;
@@ -187,34 +191,88 @@ public class ClickPostActivity extends AppCompatActivity {
             case R.id.save_gallery:
             {
                 //to get the image from the ImageView (say iv)
-//                BitmapDrawable draw = (BitmapDrawable) editImage.getDrawable();
-//                Bitmap bitmap = ((BitmapDrawable) editImage.getDrawable()).getBitmap();
+                BitmapDrawable draw = (BitmapDrawable) editImage.getDrawable();
+                Bitmap bitmap = ((BitmapDrawable) editImage.getDrawable()).getBitmap();
 //
-//                File filepath = Environment.getExternalStorageDirectory();
-//                File dir = new File(filepath.getAbsolutePath()+"/Pictures/");
-//                dir.mkdir();
-//                File file = new File(dir, System.currentTimeMillis()+".jpg");
+
+//                ContextWrapper cw = new ContextWrapper(getApplicationContext());
+//                File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
+
+//                File filepath = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+//                File file = new File(filepath.getAbsolutePath()+"/Demo/");
+//                file.mkdirs();
+//                directory.mkdir();
+
+//                File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+
+//                File file = new File(cobaDir, System.currentTimeMillis()+".jpg");
+//                String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+//                String imageFileName = "JPEG_" + timeStamp + "_";
+//                File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
 //                try {
-//                    outputStream = new FileOutputStream(file);
-//                } catch (FileNotFoundException e) {
-//                    e.printStackTrace();
-//                }
-//                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
-//                Toast.makeText(this, "Image Saved ", Toast.LENGTH_SHORT).show();
-//                try {
-//                    outputStream.flush();
+//                    File image = File.createTempFile(
+//                            imageFileName,  /* prefix */
+//                            ".jpg",         /* suffix */
+//                            storageDir      /* directory */
+//                    );
 //                } catch (IOException e) {
 //                    e.printStackTrace();
 //                }
-//                try {
-//                    outputStream.close();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
+
+                File file = getOutputMediaFile();
+                Toast.makeText(this, "Check : "+ file, Toast.LENGTH_LONG).show();
+                try {
+                    outputStream = new FileOutputStream(file);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+                if(bitmap!=null)
+                {
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+                    Toast.makeText(this, "Image Saved ", Toast.LENGTH_SHORT).show();
+                } else
+                {
+                    Toast.makeText(this, "Image not found", Toast.LENGTH_SHORT).show();
+                }
+                try {
+                    outputStream.flush();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    outputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
             return true;
         }
 
         return super.onContextItemSelected(item);
+    }
+
+    private File getOutputMediaFile() {
+        // To be safe, you should check that the SDCard is mounted
+        // using Environment.getExternalStorageState() before doing this.
+        File mediaStorageDir = new File(Environment.getExternalStorageDirectory()
+                + "/Android/data/"
+                + getApplicationContext().getPackageName()
+                + "/Files/Mobile");
+
+        // This location works best if you want the created images to be shared
+        // between applications and persist after your app has been uninstalled.
+
+        // Create the storage directory if it does not exist
+        if (!mediaStorageDir.exists()){
+            if (!mediaStorageDir.mkdirs()){
+                return null;
+            }
+        }
+        // Create a media file name
+        String timeStamp = new SimpleDateFormat("ddMMyyyy_HHmm").format(new Date());
+        File mediaFile;
+        String mImageName="MI_"+ timeStamp +".jpg";
+        mediaFile = new File(mediaStorageDir.getPath() + File.separator + mImageName);
+        return mediaFile;
     }
 }
