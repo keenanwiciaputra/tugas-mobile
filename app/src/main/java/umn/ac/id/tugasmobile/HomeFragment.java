@@ -96,7 +96,7 @@ public class HomeFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_home, container, false);
 
         mAuth = FirebaseAuth.getInstance();
-//        currentUserID = mAuth.getCurrentUser().getUid();
+        currentUserID = mAuth.getCurrentUser().getUid();
         usersRef = FirebaseDatabase.getInstance().getReference().child("Users");
         postsRef = FirebaseDatabase.getInstance().getReference().child("Posts");
         likesRef = FirebaseDatabase.getInstance().getReference().child("Likes");
@@ -165,14 +165,26 @@ public class HomeFragment extends Fragment {
                         getActivity().startActivity(clickPostIntent);
                     }
                 });
-                viewHolder.LikeButton.setOnClickListener(new View.OnClickListener() {
+
+                viewHolder.CommentButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        Intent commentsIntent = new Intent();
+                        commentsIntent.setClass(getActivity(), CommentsActivity.class);
+                        commentsIntent.putExtra("PostKey", PostKey);
+                        getActivity().startActivity(commentsIntent);
+                    }
+                });
+                viewHolder.LikeButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v)
+                    {
                         LikeChecker = true;
 
                         likesRef.addValueEventListener(new ValueEventListener() {
                             @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot)
+                            {
                                if (LikeChecker.equals(true))
                                {
                                    if(dataSnapshot.child(PostKey).hasChild(currentUserID))
@@ -206,11 +218,11 @@ public class HomeFragment extends Fragment {
         View mView;
 
         ImageButton LikeButton, CommentButton;
-        TextView LikesCount, CommentsCount;
+        TextView LikesCount;
         int countLikes;
         String currentUserId;
         DatabaseReference LikesRef;
-
+        FirebaseAuth mAuth;
 
         public PostsViewHolder(View itemView)
         {
@@ -220,10 +232,10 @@ public class HomeFragment extends Fragment {
             LikeButton = (ImageButton) mView.findViewById(R.id.btnLikes);
             CommentButton = (ImageButton) mView.findViewById(R.id.btnComment);
             LikesCount = (TextView) mView.findViewById(R.id.tvLikesCount);
-            CommentsCount = (TextView) mView.findViewById(R.id.tvCommentsCount);
 
             LikesRef = FirebaseDatabase.getInstance().getReference().child("Likes");
-            currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            mAuth = FirebaseAuth.getInstance();
+            currentUserId = mAuth.getCurrentUser().getUid();
         }
 
         public void setLikeButtonStatus(final String postKey)
@@ -248,7 +260,7 @@ public class HomeFragment extends Fragment {
                 }
 
                 @Override
-                public void onCancelled(DatabaseError databaseError){
+                public void onCancelled(@NonNull DatabaseError databaseError){
 
                 }
             });

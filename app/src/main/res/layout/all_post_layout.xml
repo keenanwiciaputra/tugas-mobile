@@ -125,6 +125,31 @@
             </ImageView>
 
         </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="69dp">
+        <TextView
+            android:id="@+id/tvLikesCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="24"
+            android:textColor="@color/whiteFont"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tvLikes"
+            android:background="@null"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:text="Likes"
+            android:textColor="@color/greyFont"
+            android:textSize="16sp"/>
+    </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -139,54 +164,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/comment"
+                android:layout_marginStart="200dp"
                 android:background="@null">
             </ImageButton>
 
-            <TextView
-                android:id="@+id/tvCommentsCount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="24"
-                android:layout_marginStart="10dp"
-                android:textColor="@color/whiteFont"
-                android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/tvComments"
-                android:background="@null"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:text="Likes"
-                android:textColor="@color/greyFont"
-                android:textSize="16sp"/>
             <ImageButton
                 android:id="@+id/btnLikes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/dislike"
-                android:layout_marginStart="100dp"
+                android:layout_marginStart="35dp"
                 android:background="@null">
             </ImageButton>
 
-            <TextView
-                android:id="@+id/tvLikesCount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="24"
-                android:layout_marginStart="10dp"
-                android:textColor="@color/whiteFont"
-                android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/tvLikes"
-                android:background="@null"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:text="Likes"
-                android:textColor="@color/greyFont"
-                android:textSize="16sp"/>
 
 
         </LinearLayout>

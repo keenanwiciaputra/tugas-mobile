@@ -54,7 +54,7 @@ public class PostActivity extends AppCompatActivity {
     private Button btnPost;
     private EditText postDesc;
     private static final int Gallery_Pick = 1;
-    private static final int REQUEST_IMAGE_CAPTURE = 1;
+    private static final int REQUEST_IMAGE_CAPTURE = 2;
     private static final int pic_id = 321;
     private Uri imageUri, resultUri;
     private ImageView postImage;
