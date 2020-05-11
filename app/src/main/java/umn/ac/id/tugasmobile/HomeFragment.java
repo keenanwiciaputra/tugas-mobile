@@ -154,6 +154,7 @@ public class HomeFragment extends Fragment {
                 viewHolder.setDescription(model.getDescription());
                 viewHolder.setProfileimage(model.getProfileimage());
                 viewHolder.setPostimage(model.getPostimage());
+                viewHolder.setLocation(model.getLocation());
 
                 viewHolder.setLikeButtonStatus(PostKey);
 
@@ -297,6 +298,14 @@ public class HomeFragment extends Fragment {
             Picasso.get().load(postimage).into(PostImage);
         }
 
+        public void setLocation(String location)
+        {
+            TextView PostLocation = (TextView) mView.findViewById(R.id.post_location);
+            if(location!=null)
+            {
+                PostLocation.setText("Posted from " + location);
+            }
+        }
 
 
     }
