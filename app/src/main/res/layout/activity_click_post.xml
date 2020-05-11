@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ClickPostActivity"
+    android:background="@color/backgroundDark">
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:id="@+id/edit_fullname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|center"
+            android:text="Full Name"
+            android:textColor="@color/whiteFont"
+            android:textColorHint="@color/whiteFont"
+            android:textSize="20sp"
+            android:textStyle="bold">
+        </TextView>
+
+        <TextView
+            android:id="@+id/edit_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|center"
+            android:text="Username"
+            android:textColor="@color/whiteFont"
+            android:textColorHint="@color/whiteFont"
+            android:textSize="16sp">
+        </TextView>
+
+        <ImageView
+            android:id="@+id/edit_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="15dp"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:src="@drawable/pp"
+            android:adjustViewBounds="true"
+            android:maxHeight="375dp"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop">
+        </ImageView>
+
+        <TextView
+            android:id="@+id/edit_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:textAlignment="textStart"
+            android:text="Description"
+            android:textColor="@color/whiteFont"
+            android:textColorHint="@color/whiteFont"
+            android:textSize="14sp">
+        </TextView>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginBottom="40dp"
+            android:gravity="bottom|center">
+
+            <Button
+                android:id="@+id/btnEditPost"
+                android:layout_width="110dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="15dp"
+                android:text="Edit Post"
+                android:background="@drawable/button1"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"/>
+
+            <Button
+                android:id="@+id/btnDeletePost"
+                android:layout_width="110dp"
+                android:layout_height="40dp"
+                android:layout_marginRight="15dp"
+                android:text="Delete Post"
+                android:background="@drawable/button2"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"/>
+        </RelativeLayout>
+
+
+    </LinearLayout>
+</RelativeLayout>
