@@ -133,6 +133,7 @@
             android:layout_marginBottom="15dp"
             android:layout_marginLeft="69dp">
 
+
             <ImageButton
                 android:id="@+id/btnComment"
                 android:layout_width="wrap_content"
@@ -141,23 +142,52 @@
                 android:background="@null">
             </ImageButton>
 
-            <ImageButton
-                android:id="@+id/btnLike"
+            <TextView
+                android:id="@+id/tvCommentsCount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/comment"
-                android:layout_marginLeft="20dp"
+                android:text="24"
+                android:layout_marginStart="10dp"
+                android:textColor="@color/whiteFont"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tvComments"
+                android:background="@null"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:text="Likes"
+                android:textColor="@color/greyFont"
+                android:textSize="16sp"/>
+            <ImageButton
+                android:id="@+id/btnLikes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/dislike"
+                android:layout_marginStart="100dp"
                 android:background="@null">
             </ImageButton>
 
-            <ImageButton
-                android:id="@+id/btnDownload"
+            <TextView
+                android:id="@+id/tvLikesCount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/comment"
-                android:layout_marginLeft="20dp"
-                android:background="@null">
-            </ImageButton>
+                android:text="24"
+                android:layout_marginStart="10dp"
+                android:textColor="@color/whiteFont"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tvLikes"
+                android:background="@null"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:text="Likes"
+                android:textColor="@color/greyFont"
+                android:textSize="16sp"/>
+
 
         </LinearLayout>
     </LinearLayout>

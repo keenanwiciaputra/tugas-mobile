@@ -21,6 +21,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".FriendsActivity"></activity>
         <activity android:name=".PersonProfileActivity" />
+        <activity android:name=".ClickPostActivity" />
         <activity android:name=".ForgotPassword" />
         <activity android:name=".EditProfileActivity" />
         <activity android:name=".PostActivity" />

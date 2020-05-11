@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextSwitcher;
 import android.widget.TextView;
@@ -52,9 +53,11 @@ public class HomeFragment extends Fragment {
     private String mParam2;
     private ImageView homeImage;
 
+    Boolean LikeChecker = false;
+
     private RecyclerView postList;
     private FirebaseAuth mAuth;
-    private DatabaseReference usersRef, postsRef;
+    private DatabaseReference usersRef, postsRef,likesRef,commentsRef;
     private FirebaseRecyclerAdapter adapter;
     String currentUserID;
 
@@ -96,6 +99,8 @@ public class HomeFragment extends Fragment {
 //        currentUserID = mAuth.getCurrentUser().getUid();
         usersRef = FirebaseDatabase.getInstance().getReference().child("Users");
         postsRef = FirebaseDatabase.getInstance().getReference().child("Posts");
+        likesRef = FirebaseDatabase.getInstance().getReference().child("Likes");
+        commentsRef = FirebaseDatabase.getInstance().getReference().child("Comments");
 
         postList = (RecyclerView) v.findViewById(R.id.all_users_post_list);
         postList.setHasFixedSize(true);
@@ -149,6 +154,8 @@ public class HomeFragment extends Fragment {
                 viewHolder.setProfileimage(model.getProfileimage());
                 viewHolder.setPostimage(model.getPostimage());
 
+                viewHolder.setLikeButtonStatus(PostKey);
+
                 viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -156,6 +163,36 @@ public class HomeFragment extends Fragment {
                         clickPostIntent.setClass(getActivity(), ClickPostActivity.class);
                         clickPostIntent.putExtra("PostKey", PostKey);
                         getActivity().startActivity(clickPostIntent);
+                    }
+                });
+                viewHolder.LikeButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        LikeChecker = true;
+
+                        likesRef.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                               if (LikeChecker.equals(true))
+                               {
+                                   if(dataSnapshot.child(PostKey).hasChild(currentUserID))
+                                   {
+                                       likesRef.child(PostKey).child(currentUserID).removeValue();
+                                       LikeChecker = false;
+                                   }
+                                   else
+                                   {
+                                       likesRef.child(PostKey).child(currentUserID).setValue(true);
+                                       LikeChecker = false;
+                                   }
+                               }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
                     }
                 });
             }
@@ -168,11 +205,56 @@ public class HomeFragment extends Fragment {
     {
         View mView;
 
+        ImageButton LikeButton, CommentButton;
+        TextView LikesCount, CommentsCount;
+        int countLikes;
+        String currentUserId;
+        DatabaseReference LikesRef;
+
+
         public PostsViewHolder(View itemView)
         {
             super(itemView);
             mView = itemView;
+
+            LikeButton = (ImageButton) mView.findViewById(R.id.btnLikes);
+            CommentButton = (ImageButton) mView.findViewById(R.id.btnComment);
+            LikesCount = (TextView) mView.findViewById(R.id.tvLikesCount);
+            CommentsCount = (TextView) mView.findViewById(R.id.tvCommentsCount);
+
+            LikesRef = FirebaseDatabase.getInstance().getReference().child("Likes");
+            currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         }
+
+        public void setLikeButtonStatus(final String postKey)
+        {
+            LikesRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot)
+                {
+                    if (dataSnapshot.child(postKey).hasChild(currentUserId))
+                    {
+                        countLikes = (int) dataSnapshot.child(postKey).getChildrenCount();
+                        LikeButton.setImageResource(R.drawable.like);
+                        LikesCount.setText(Integer.toString(countLikes));
+                    }
+                    else
+                    {
+                        countLikes = (int) dataSnapshot.child(postKey).getChildrenCount();
+                        LikeButton.setImageResource(R.drawable.dislike);
+                        LikesCount.setText(Integer.toString(countLikes));
+                    }
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError){
+
+                }
+            });
+        }
+
+
 
         public void setUsername(String username)
         {
@@ -215,6 +297,8 @@ public class HomeFragment extends Fragment {
             ImageView PostImage = (ImageView) mView.findViewById(R.id.post_image);
             Picasso.get().load(postimage).into(PostImage);
         }
+
+
     }
 
 }
