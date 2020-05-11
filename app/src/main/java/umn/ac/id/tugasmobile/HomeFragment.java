@@ -148,6 +148,7 @@ public class HomeFragment extends Fragment {
                 viewHolder.setDescription(model.getDescription());
                 viewHolder.setProfileimage(model.getProfileimage());
                 viewHolder.setPostimage(model.getPostimage());
+                viewHolder.setLocation(model.getLocation());
 
                 viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -214,6 +215,15 @@ public class HomeFragment extends Fragment {
         {
             ImageView PostImage = (ImageView) mView.findViewById(R.id.post_image);
             Picasso.get().load(postimage).into(PostImage);
+        }
+
+        public void setLocation(String location)
+        {
+            TextView PostLocation = (TextView) mView.findViewById(R.id.post_location);
+            if(location!=null)
+            {
+                PostLocation.setText("Posted from " + location);
+            }
         }
     }
 

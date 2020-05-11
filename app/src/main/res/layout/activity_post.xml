@@ -113,6 +113,31 @@
                 android:background="@null"
                 android:layout_marginLeft="12dp">
             </ImageButton>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Switch
+                    android:id="@+id/switch_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="7dp"
+                    android:theme="@style/SwitchTheme"
+                    android:checked="false">
+                </Switch>
+
+                <TextView
+                    android:id="@+id/switch_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/whiteFont"
+                    android:text="Location">
+                </TextView>
+            </LinearLayout>
+
         </LinearLayout>
     </LinearLayout>
 

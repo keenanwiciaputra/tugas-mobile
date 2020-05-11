@@ -3,28 +3,42 @@ package umn.ac.id.tugasmobile;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -43,6 +57,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -53,9 +69,14 @@ public class PostActivity extends AppCompatActivity {
     private ImageButton openCamera, openGallery;
     private Button btnPost;
     private EditText postDesc;
+    private Switch btnSwitch;
     private static final int Gallery_Pick = 1;
-    private static final int REQUEST_IMAGE_CAPTURE = 1;
+    private static final int REQUEST_IMAGE_CAPTURE = 2;
     private static final int pic_id = 321;
+    private static final int MY_PERMISSIONS_REQUEST_ACCESS_LOCATION = 123;
+    private double longitude, latitude;
+    private String cityName = null, s;
+
     private Uri imageUri, resultUri;
     private ImageView postImage;
     private String desc, saveCurrentDate, saveCurrentTime, postRandomName, downloadUrl;
@@ -64,6 +85,10 @@ public class PostActivity extends AppCompatActivity {
     private DatabaseReference usersRef, postsRef;
     private FirebaseAuth mAuth;
     private StorageReference imageRef;
+
+    private FusedLocationProviderClient fusedLocationClient;
+    private LocationRequest locationRequest;
+    private LocationCallback locationCallback;
 
     String currentPhotoPath;
     String currentUserID;
@@ -88,10 +113,81 @@ public class PostActivity extends AppCompatActivity {
         postDesc = findViewById(R.id.etPost);
         btnPost = findViewById(R.id.btnPost);
         openGallery = findViewById(R.id.insertPhoto);
+        btnSwitch = findViewById(R.id.switch_location);
 
         openCamera = findViewById(R.id.openCamera);
         profilePicture = findViewById(R.id.post_profile);
         cancelPost = findViewById(R.id.cancelPost);
+
+        //LOCATION PERMISSION
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(PostActivity.this,
+                    new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION},
+                    MY_PERMISSIONS_REQUEST_ACCESS_LOCATION);
+        } else {
+            Log.d("PERMISSION", "already granted.");
+        }
+
+        btnSwitch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(btnSwitch.isChecked())
+                {
+                    Log.d("DEBUG", "GETTING LOCATION");
+                    fusedLocationClient = LocationServices.getFusedLocationProviderClient(PostActivity.this);
+                    fusedLocationClient.getLastLocation()
+                            .addOnSuccessListener(PostActivity.this, new OnSuccessListener<Location>() {
+                                @Override
+                                public void onSuccess(Location location) {
+                                    // Got last known location. In some rare situations this can be null.
+                                    if (location != null) {
+
+                                        cityName = null;
+                                        Geocoder gcd = new Geocoder(getBaseContext(), Locale.getDefault());
+                                        List<Address> addresses;
+                                        try {
+                                            addresses = gcd.getFromLocation(location.getLatitude(),
+                                                    location.getLongitude(), 1);
+                                            if (addresses.size() > 0) {
+                                                System.out.println(addresses.get(0).getLocality());
+                                                cityName = addresses.get(0).getLocality();
+                                            }
+                                        }
+                                        catch (IOException e) {
+                                            e.printStackTrace();
+                                        }
+                                         s = "My current location is: "
+                                                + cityName;
+                                        Toast.makeText(PostActivity.this, "" + s, Toast.LENGTH_LONG).show();
+
+
+//                                        Toast.makeText(PostActivity.this, "Lat: " + location.getLatitude() + "and Long: " + location.getLongitude(), Toast.LENGTH_SHORT).show();
+                                    }
+                                    else {
+//                                        TextView tvLoc = findViewById(R.id.tvLocation);
+//                                        tvLoc.setText("LOCATION NOT FOUND");
+//                                        Log.d("DEBUG", "LOCATION NOT FOUND");
+                                        cityName = null;
+                                        Toast.makeText(PostActivity.this, "Location not found", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                                      @Override
+                                                      public void onFailure(@NonNull Exception e) {
+                                                          Log.d("DEBUG", "LISTENER FAILURE");
+                                                      }
+                                                  }
+                            );
+                }
+                else
+                {
+
+                }
+            }
+        });
 
         btnPost.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -233,6 +329,7 @@ public class PostActivity extends AppCompatActivity {
                         postsMap.put("profileimage", userProfileImage);
                         postsMap.put("fullname", userFullName);
                         postsMap.put("username", userName);
+                        postsMap.put("location", cityName);
                     postsRef.child(currentUserID + postRandomName).updateChildren(postsMap)
                             .addOnCompleteListener(new OnCompleteListener() {
                                 @Override
