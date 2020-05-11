@@ -38,7 +38,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     private Button btnLogout;
     private Button btnEditProfile;
 
-    private TextView username, fullname, desc, location;
+    private TextView username, fullname, desc, location, join,friends;
     private CircleImageView profilepic;
 
     private DatabaseReference profileUserRef;
@@ -84,17 +84,18 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_profile, container, false);
 
+        TextView clickTextView = (TextView) v.findViewById(R.id.tvFriends);
 
 
         mAuth = FirebaseAuth.getInstance();
         currentUserId = mAuth.getCurrentUser().getUid();
         profileUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserId);
 
-
         username = (TextView) v.findViewById(R.id.tvUserNameP);
         fullname = (TextView) v.findViewById(R.id.tvScreenNameP);
         desc = (TextView) v.findViewById(R.id.tvDescP);
         location = (TextView) v.findViewById(R.id.tvUserLocationP);
+        join = (TextView) v.findViewById(R.id.tvJoinP);
         profilepic = (CircleImageView) v.findViewById(R.id.ProfileImage);
 
         profileUserRef.addValueEventListener(new ValueEventListener() {
@@ -103,6 +104,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                 if (dataSnapshot.exists())
                 {
                     String myprofilepic = dataSnapshot.child("profileimage").getValue().toString();
+                    String myjoin = dataSnapshot.child("date").getValue().toString();
                     String mylocation = dataSnapshot.child("location").getValue().toString();
                     String mydesc = dataSnapshot.child("desc").getValue().toString();
                     String myfullname = dataSnapshot.child("fullname").getValue().toString();
@@ -114,6 +116,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                     fullname.setText(myfullname);
                     desc.setText(mydesc);
                     location.setText(mylocation);
+                    join.setText("Joined " + myjoin);
 
                 }
             }
@@ -124,14 +127,14 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
             }
         });
 
-        btnEditProfile = v.findViewById(R.id.btnEditProfile);
-        btnEditProfile.setOnClickListener(new View.OnClickListener() {
+        clickTextView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setClass(getActivity(), EditProfileActivity.class);
+                intent.setClass(getActivity(), FriendsActivity.class);
                 getActivity().startActivity(intent);
             }
+
         });
 
         btnLogout = v.findViewById(R.id.btnLogout);

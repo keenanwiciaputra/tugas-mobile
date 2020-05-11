@@ -15,6 +15,7 @@
         android:paddingLeft="55dp"
         android:textColor="@color/colorLightGreyTransparent"
         android:textColorHint="@color/colorLightGreyTransparent"
+        android:layout_marginTop="20dp"
         />
 
         <ImageButton
@@ -22,7 +23,7 @@
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:src="@drawable/search"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="28dp"
             android:layout_marginLeft="15dp"
             android:background="@null"/>
 
@@ -31,7 +32,7 @@
         android:id="@+id/search_result_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="80dp"
         android:scrollbars="vertical"></androidx.recyclerview.widget.RecyclerView>
 
 

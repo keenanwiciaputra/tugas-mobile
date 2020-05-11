@@ -45,7 +45,7 @@
             android:layout_below="@id/login"
             android:textColor="@color/whiteFont"
             android:hint="Email"
-            android:inputType="textEmailAddress"
+            android:inputType="textEmailAddress|textMultiLine"
             android:textColorHint="#a6a6a6"
             android:background="@drawable/borderbottom"/>
 
@@ -56,7 +56,7 @@
             android:layout_below="@id/register_email"
             android:textColor="@color/whiteFont"
             android:hint="Password"
-            android:inputType="textPassword"
+            android:inputType="textPassword|textMultiLine"
             android:textColorHint="#a6a6a6"
             android:background="@drawable/borderbottom"/>
 
@@ -67,7 +67,7 @@
             android:layout_below="@id/register_password"
             android:textColor="@color/whiteFont"
             android:hint="Confirm Password"
-            android:inputType="textPassword"
+            android:inputType="textPassword|textMultiLine"
             android:textColorHint="#a6a6a6"
             android:background="@drawable/borderbottom"/>
 

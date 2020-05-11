@@ -46,7 +46,7 @@
             android:layout_marginTop="50px"
             android:textColor="@color/whiteFont"
             android:hint="Email"
-            android:inputType="textEmailAddress"
+            android:inputType="textEmailAddress|textMultiLine"
             android:textColorHint="#a6a6a6"
             android:background="@drawable/borderbottom"/>
 
@@ -57,7 +57,7 @@
             android:layout_below="@id/login_email"
             android:textColor="@color/whiteFont"
             android:hint="Password"
-            android:inputType="textPassword"
+            android:inputType="textPassword|textMultiLine"
             android:textColorHint="#a6a6a6"
             android:background="@drawable/borderbottom"/>
 
@@ -71,20 +71,40 @@
             android:layout_marginTop="80px"/>
 
     </LinearLayout>
-
     <LinearLayout
         android:id="@+id/layout2"
+        android:layout_marginTop="80px"
         android:layout_marginLeft="80px"
         android:layout_marginRight="80px"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_below="@+id/layout1">
+        android:layout_below="@+id/layout1"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/forgot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Forgot Password"
+            android:textColor="#54bf99"
+            />
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/layout3"
+        android:layout_marginTop="30px"
+        android:layout_marginLeft="80px"
+        android:layout_marginRight="80px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/layout2"
+        android:gravity="center">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="80px"
             android:text="Don't have an account? "
             android:textColor="@color/whiteFont"
             />
@@ -92,7 +112,6 @@
             android:id="@+id/signup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="80px"
             android:text="Sign Up here"
             android:textColor="#54bf99"
             />

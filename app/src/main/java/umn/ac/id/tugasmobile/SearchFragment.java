@@ -1,6 +1,7 @@
 package umn.ac.id.tugasmobile;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -122,11 +123,23 @@ public class SearchFragment extends Fragment {
             }
 
             @Override
-            protected void onBindViewHolder( FindFriendsViewHolder viewHolder, int i, FindFriends model)
+            protected void onBindViewHolder( FindFriendsViewHolder viewHolder, final int i, FindFriends model)
             {
                 viewHolder.setFullname(model.getFullname());
                 viewHolder.setDesc(model.getDesc());
                 viewHolder.setProfileimage(model.getProfileimage());
+
+                viewHolder.mView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        String visit_user_id = getRef(i).getKey();
+                        Intent intent = new Intent();
+                        intent.setClass(getActivity(), PersonProfileActivity.class);
+                        intent.putExtra("visit_user_id",visit_user_id);
+                        getActivity().startActivity(intent);
+                    }
+                });
             }
         };
         adapter.startListening();

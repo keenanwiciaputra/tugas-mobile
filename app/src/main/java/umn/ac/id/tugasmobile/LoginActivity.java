@@ -23,7 +23,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button btnLogin;
     private EditText userEmail, userPassword;
     private ProgressDialog loadingBar;
-    private TextView signUp;
+    private TextView signUp, ForgotPassword;
     private FirebaseAuth mAuth;
 
     @Override
@@ -38,6 +38,7 @@ public class LoginActivity extends AppCompatActivity {
         userPassword = findViewById(R.id.login_password);
         btnLogin = findViewById(R.id.btnLogin);
         loadingBar = new ProgressDialog(this);
+        ForgotPassword = findViewById(R.id.forgot);
 
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,6 +51,13 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 AllowingUserToLogin();
+            }
+        });
+
+        ForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, ForgotPassword.class));
             }
         });
     }

@@ -58,7 +58,7 @@
         android:textColor="@color/whiteFont"
         android:textColorHint="#a6a6a6"
         android:background="@drawable/borderbottom"
-        android:inputType="textMultiLine" />
+        android:inputType="textCapSentences|textMultiLine" />
 
     <EditText
         android:id="@+id/setup_desc"
@@ -70,7 +70,7 @@
         android:textColor="@color/whiteFont"
         android:textColorHint="#a6a6a6"
         android:background="@drawable/borderbottom"
-        android:inputType="textMultiLine" />
+        android:inputType="textCapSentences|textMultiLine" />
 
 
         <EditText
@@ -83,7 +83,7 @@
             android:textColor="@color/whiteFont"
             android:textColorHint="#a6a6a6"
             android:background="@drawable/borderbottom"
-            android:inputType="textMultiLine" />
+            android:inputType="textCapSentences|textMultiLine" />
 
         <Button
             android:id="@+id/btnSave"

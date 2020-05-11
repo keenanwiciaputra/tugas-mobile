@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroundDark"
-    tools:context=".NotificationFragment">
+    tools:context=".PersonProfileActivity">
+
+
 
     <RelativeLayout
         android:id="@+id/scrollProfile"
@@ -26,7 +28,23 @@
                 tools:layout_editor_absoluteX="8dp"
                 tools:layout_editor_absoluteY="0dp">
 
-
+                <LinearLayout
+                    android:id="@+id/layout_back"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center"
+                    >
+                    <Button
+                        android:id="@+id/cancelbutton"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="20dp"
+                        android:textColor="#FFF"
+                        android:background="@drawable/arrowback"
+                        android:scaleType="centerCrop"/>
+                </LinearLayout>
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/ProfileImage"
                     android:layout_width="150dp"
@@ -34,6 +52,7 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="20dp"
                     android:background="#FFFFFF"
+                    android:layout_below="@+id/layout_back"
                     android:backgroundTint="@color/colorBackground"
                     android:elevation="12dp"
                     android:scaleType="centerCrop"
@@ -105,27 +124,27 @@
                         android:text="Jakarta, Indonesia"
                         android:textColor="@color/colorWhite"
                         android:textSize="16sp" />
-                <ImageView
-                    android:id="@+id/calendar"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:visibility="visible"
-                    android:layout_marginStart="20dp"
-                    app:srcCompat="@drawable/calendar" />
+                    <ImageView
+                        android:id="@+id/calendar"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:visibility="visible"
+                        android:layout_marginStart="20dp"
+                        app:srcCompat="@drawable/calendar" />
 
-                <TextView
-                    android:id="@+id/tvJoinP"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/tvScreenNameP"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginStart="5dp"
-                    android:autoLink="all"
-                    android:text="Joined 12/04/2020"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="16sp" />
+                    <TextView
+                        android:id="@+id/tvJoinP"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tvScreenNameP"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginStart="5dp"
+                        android:autoLink="all"
+                        android:text="Joined 12/04/2020"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="16sp" />
                 </LinearLayout>
 
             </RelativeLayout>
@@ -147,89 +166,99 @@
 
 
                     <TextView
-                        android:id="@+id/tvFriendsCount"
+                        android:id="@+id/tvFollowingsCount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="24"
+                        android:text="784"
                         android:textColor="@color/whiteFont"
                         android:textSize="16sp" />
 
                     <TextView
-                        android:id="@+id/tvFriends"
-                        android:background="@null"
+                        android:id="@+id/tvFollowings"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="4dp"
-                        android:text="Friends"
+                        android:text="Following"
                         android:textColor="@color/greyFont"
-                        android:textSize="16sp"/>
+                        android:textSize="16sp" />
 
                 </LinearLayout>
 
                 <LinearLayout
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp">
 
                     <TextView
-                        android:id="@+id/tvPostsCount"
+                        android:id="@+id/tvFollowersCount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="5"
+                        android:text="566"
                         android:textColor="@color/whiteFont"
                         android:textSize="16sp" />
 
                     <TextView
-                        android:id="@+id/tvPosts"
+                        android:id="@+id/tvFollowers"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="4dp"
-                        android:text="Posts"
+                        android:text="Followers"
                         android:textColor="@color/greyFont"
                         android:textSize="16sp" />
 
                 </LinearLayout>
 
-            </LinearLayout>
 
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
                 android:layout_below="@+id/lUserFollows"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:layout_marginTop="12dp">
-
-                <Button
-                    android:id="@+id/btnEditProfile"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/edit_profile_button"
-                    android:gravity="center"
-                    android:padding="10dp"
-                    android:scaleType="fitXY"
-                    android:text="Edit Profile"
-                    android:textColor="#ffffff" />
-
-                <Button
-                    android:id="@+id/btnLogout"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="35dp"
-                    android:background="@drawable/logout_button"
-                    android:gravity="center"
-                    android:padding="10dp"
-                    android:scaleType="fitXY"
-                    android:text="Logout"
-                    android:textColor="#ffffff" />
+                android:gravity="center">
+            <Button
+                android:id="@+id/btnSendReq"
+                android:layout_width="350dp"
+                android:layout_height="40dp"
+                android:background="@drawable/edit_profile_button"
+                android:textColor="#ffffff"
+                android:text="SEND FRIEND REQUEST"
+                android:layout_marginTop="20px"
+                />
+            <Button
+                android:id="@+id/btnDeclineReq"
+                android:layout_width="350dp"
+                android:layout_height="40dp"
+                android:background="@drawable/logout_button"
+                android:textColor="#ffffff"
+                android:text="DECLINE FRIEND REQUEST"
+                android:layout_marginTop="30px"/>
             </LinearLayout>
-
-
         </RelativeLayout>
-
-
-
     </RelativeLayout>
+
+<!--        <RelativeLayout-->
+<!--            android:id="@+id/lMainSeparator"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="3dp"-->
+<!--            android:layout_below="@id/userHeadline"-->
+<!--            android:layout_marginTop="20dp"-->
+<!--            android:background="#3D3D3D">-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="0.8dp"-->
+<!--                android:background="@color/colorDarkLineDarker" />-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="0.3dp"-->
+<!--                android:layout_alignParentBottom="true"-->
+<!--                android:background="@color/colorDarkLineDarker" />-->
+<!--        </RelativeLayout>-->
+
+<!--    </RelativeLayout>-->
 
 </FrameLayout>
 
@@ -238,18 +267,18 @@
 
 
     <!--    <ImageView-->
-<!--        android:id="@+id/imageView"-->
-<!--        android:layout_width="200dp"-->
-<!--        android:layout_height="200dp"-->
-<!--        android:layout_gravity="center"-->
-<!--        android:src="@drawable/profile"-->
-<!--        />-->
+    <!--        android:id="@+id/imageView"-->
+    <!--        android:layout_width="200dp"-->
+    <!--        android:layout_height="200dp"-->
+    <!--        android:layout_gravity="center"-->
+    <!--        android:src="@drawable/profile"-->
+    <!--        />-->
 
-<!--    <Button-->
-<!--        android:id="@+id/btnLogout"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="40dp"-->
-<!--        android:background="@drawable/button1"-->
-<!--        android:textColor="#ffffff"-->
-<!--        android:text="LOGOUT"-->
-<!--        android:layout_marginTop="70dp"/>-->
+    <!--    <Button-->
+    <!--        android:id="@+id/btnLogout"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="40dp"-->
+    <!--        android:background="@drawable/button1"-->
+    <!--        android:textColor="#ffffff"-->
+    <!--        android:text="LOGOUT"-->
+    <!--        android:layout_marginTop="70dp"/>-->

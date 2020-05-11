@@ -31,6 +31,8 @@ import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -40,7 +42,7 @@ public class SetupActivity extends AppCompatActivity {
     private Button btnSave;
     private CircleImageView profilePicture;
     private ProgressDialog loadingBar;
-
+    private String saveCurrentDate;
 
     private FirebaseAuth mAuth;
     private DatabaseReference usersRef;
@@ -181,6 +183,10 @@ public class SetupActivity extends AppCompatActivity {
         String desc = userDesc.getText().toString();
         String location = userLocation.getText().toString();
 
+        Calendar getDate = Calendar.getInstance();
+        SimpleDateFormat currentDate = new SimpleDateFormat("dd MMMM yyyy");
+        saveCurrentDate = currentDate.format(getDate.getTime());
+
         if(TextUtils.isEmpty(username))
         {
             Toast.makeText(this, "Please write your username. . .", Toast.LENGTH_SHORT).show();
@@ -209,6 +215,7 @@ public class SetupActivity extends AppCompatActivity {
             userMap.put("fullname", fullname);
             userMap.put("desc", desc);
             userMap.put("location", location);
+            userMap.put("date", saveCurrentDate);
             usersRef.updateChildren(userMap).addOnCompleteListener(new OnCompleteListener() {
                 @Override
                 public void onComplete(@NonNull Task task) {
