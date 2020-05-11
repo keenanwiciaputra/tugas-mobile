@@ -298,8 +298,7 @@ public class HomeFragment extends Fragment {
             Picasso.get().load(postimage).into(PostImage);
         }
 
-        public void setLocation(String location)
-        {
+        public void setLocation(String location) {
             TextView PostLocation = (TextView) mView.findViewById(R.id.post_location);
             if(location!=null)
             {
