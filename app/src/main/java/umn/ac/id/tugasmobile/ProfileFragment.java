@@ -38,14 +38,16 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     private Button btnLogout;
     private Button btnEditProfile;
 
-    private TextView username, fullname, desc, location, join,friends;
+    private TextView username, fullname, desc, location, join,countFriends,countPosts;
     private CircleImageView profilepic;
 
-    private DatabaseReference profileUserRef;
+    private DatabaseReference profileUserRef,friendsRef,postsRef;
     private FirebaseAuth mAuth;
 
     private String currentUserId;
 
+    private int intCountFriends = 0;
+    private int intCountPosts = 0;
 
 
     public ProfileFragment() {
@@ -79,7 +81,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
     }
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_profile, container, false);
@@ -90,7 +92,11 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         mAuth = FirebaseAuth.getInstance();
         currentUserId = mAuth.getCurrentUser().getUid();
         profileUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserId);
+        friendsRef = FirebaseDatabase.getInstance().getReference().child("Friends");
+        postsRef = FirebaseDatabase.getInstance().getReference().child("Posts");
 
+        countFriends = (TextView) v.findViewById(R.id.tvFriendsCount);
+        countPosts = (TextView) v.findViewById(R.id.tvPostsCount);
         username = (TextView) v.findViewById(R.id.tvUserNameP);
         fullname = (TextView) v.findViewById(R.id.tvScreenNameP);
         desc = (TextView) v.findViewById(R.id.tvDescP);
@@ -137,6 +143,17 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
         });
 
+        btnEditProfile = v.findViewById(R.id.btnEditProfile);
+        btnEditProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setClass(getActivity(), EditProfileActivity.class);
+                getActivity().startActivity(intent);
+            }
+        });
+
+
         btnLogout = v.findViewById(R.id.btnLogout);
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -147,6 +164,41 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                         SendUserToLoginActivity();
                         break;
                 }
+            }
+        });
+
+        friendsRef.child(currentUserId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists())
+                {
+                    intCountFriends = (int) dataSnapshot.getChildrenCount();
+                    countFriends.setText(Integer.toString(intCountFriends));
+                }
+                else
+                {
+                    countFriends.setText("0");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        postsRef.orderByChild("uid")
+                .startAt(currentUserId).endAt(currentUserId+"\uf8ff")
+                .addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                intCountPosts = (int) dataSnapshot.getChildrenCount();
+                countPosts.setText(Integer.toString(intCountPosts));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                countPosts.setText("0");
             }
         });
 

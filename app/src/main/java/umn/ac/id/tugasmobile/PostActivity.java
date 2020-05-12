@@ -20,6 +20,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.renderscript.Sampler;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -92,6 +93,8 @@ public class PostActivity extends AppCompatActivity {
 
     String currentPhotoPath;
     String currentUserID;
+
+    private long countPosts = 0;
 
     public PostActivity() {
     }
@@ -310,6 +313,26 @@ public class PostActivity extends AppCompatActivity {
 
     private void SavingPostInformation()
     {
+
+        postsRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists())
+                {
+                    countPosts = dataSnapshot.getChildrenCount();
+                }
+                else
+                {
+                    countPosts = 0;
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
         usersRef.child(currentUserID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot)
@@ -330,6 +353,8 @@ public class PostActivity extends AppCompatActivity {
                         postsMap.put("fullname", userFullName);
                         postsMap.put("username", userName);
                         postsMap.put("location", cityName);
+                        postsMap.put("counter", countPosts);
+
                     postsRef.child(currentUserID + postRandomName).updateChildren(postsMap)
                             .addOnCompleteListener(new OnCompleteListener() {
                                 @Override

@@ -129,9 +129,11 @@ public class HomeFragment extends Fragment {
     //
     private void DisplayAllUsersPosts()
     {
+        Query SortPostDecending = postsRef.orderByChild("counter");
+
         FirebaseRecyclerOptions<Posts> options =
                 new FirebaseRecyclerOptions.Builder<Posts>()
-                        .setQuery(postsRef, Posts.class)
+                        .setQuery(SortPostDecending, Posts.class)
                         .build();
 
         FirebaseRecyclerAdapter adapter = new FirebaseRecyclerAdapter<Posts, PostsViewHolder>(options) {

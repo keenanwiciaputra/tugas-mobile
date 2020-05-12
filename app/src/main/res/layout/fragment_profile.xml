@@ -150,7 +150,7 @@
                         android:id="@+id/tvFriendsCount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="24"
+                        android:text="0"
                         android:textColor="@color/whiteFont"
                         android:textSize="16sp" />
 
@@ -175,7 +175,7 @@
                         android:id="@+id/tvPostsCount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="5"
+                        android:text="0"
                         android:textColor="@color/whiteFont"
                         android:textSize="16sp" />
 
