@@ -52,7 +52,7 @@
         android:id="@+id/comment_input"
         android:layout_width="match_parent"
         android:layout_height="55dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="15dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:background="@drawable/tempat_search"
@@ -62,6 +62,8 @@
         android:textColorHint="@color/colorLightGreyTransparent"
         android:layout_marginTop="20dp"
         android:inputType="textMultiLine"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         />
 
     <ImageButton

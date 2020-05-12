@@ -16,6 +16,8 @@
         android:textColor="@color/colorLightGreyTransparent"
         android:textColorHint="@color/colorLightGreyTransparent"
         android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         />
 
         <ImageButton

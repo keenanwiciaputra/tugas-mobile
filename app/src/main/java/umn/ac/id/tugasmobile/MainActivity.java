@@ -112,9 +112,6 @@ public class MainActivity extends AppCompatActivity {
                         case R.id.navigation_search:
                             openFragment(SearchFragment.newInstance("", ""));
                             return true;
-                        case R.id.navigation_notifications:
-                            openFragment(NotificationFragment.newInstance("", ""));
-                            return true;
                         case R.id.navigation_profile:
                             openFragment(ProfileFragment.newInstance("", ""));
                             return true;
