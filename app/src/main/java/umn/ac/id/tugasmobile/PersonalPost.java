@@ -1,28 +1,18 @@
 package umn.ac.id.tugasmobile;
 
-import android.content.Context;
-import android.content.Intent;
-import android.media.Image;
-import android.os.Bundle;
-
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.ContentFrameLayout;
-import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.ContextMenu;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.TextSwitcher;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -35,67 +25,21 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
-import org.w3c.dom.Text;
-
 import de.hdodenhof.circleimageview.CircleImageView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link HomeFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class HomeFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-    private ImageView homeImage;
+public class PersonalPost extends AppCompatActivity {
 
-    Boolean LikeChecker = false;
-
-    private RecyclerView postList;
+    private RecyclerView postList2;
     private FirebaseAuth mAuth;
     private DatabaseReference usersRef, postsRef,likesRef,commentsRef;
     private FirebaseRecyclerAdapter adapter;
-    private String currentUserID, databaseUserID, friendsID;
-    private Boolean PostFilter = false;
+    Boolean LikeChecker = false;
+    private String currentUserID, databaseUserID;
 
-    public HomeFragment() {
-        // Required empty public constructor
-    }
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment HomeFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static HomeFragment newInstance(String param1, String param2) {
-        HomeFragment fragment = new HomeFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_home, container, false);
+        setContentView(R.layout.activity_personal_post);
 
         mAuth = FirebaseAuth.getInstance();
         currentUserID = mAuth.getCurrentUser().getUid();
@@ -104,52 +48,38 @@ public class HomeFragment extends Fragment {
         likesRef = FirebaseDatabase.getInstance().getReference().child("Likes");
         commentsRef = FirebaseDatabase.getInstance().getReference().child("Comments");
 
-        postList = (RecyclerView) v.findViewById(R.id.all_users_post_list);
-        postList.setHasFixedSize(true);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        postList2 = (RecyclerView) findViewById(R.id.all_users_post_list2);
+        postList2.setHasFixedSize(true);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setReverseLayout(true);
         linearLayoutManager.setStackFromEnd(true);
-        postList.setLayoutManager(linearLayoutManager);
+        postList2.setLayoutManager(linearLayoutManager);
 
         DisplayAllUsersPosts();
-
-        return v;
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-    }
-
-//    @Override
-//    public void onStop() {
-//        super.onStop();
-//        adapter.stopListening();
-//    }
-
-    //
     private void DisplayAllUsersPosts()
     {
         Query SortPostDecending = postsRef.orderByChild("counter");
 
-        Query test = postsRef.orderByChild("uid").equalTo(currentUserID);
+        Query selfPost = postsRef.orderByChild("uid").equalTo(currentUserID);
 
         FirebaseRecyclerOptions<Posts> options =
                 new FirebaseRecyclerOptions.Builder<Posts>()
-                        .setQuery(SortPostDecending, Posts.class)
+                        .setQuery(selfPost, Posts.class)
                         .build();
 
-        FirebaseRecyclerAdapter adapter = new FirebaseRecyclerAdapter<Posts, PostsViewHolder>(options) {
+        FirebaseRecyclerAdapter adapter = new FirebaseRecyclerAdapter<Posts, HomeFragment.PostsViewHolder>(options) {
             @Override
-            public PostsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            public HomeFragment.PostsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
                 View view = LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.all_post_layout, parent, false);
 
-                return new PostsViewHolder(view);
+                return new HomeFragment.PostsViewHolder(view);
             }
 
             @Override
-            protected void onBindViewHolder(PostsViewHolder viewHolder, int position, Posts model) {
+            protected void onBindViewHolder(HomeFragment.PostsViewHolder viewHolder, int position, Posts model) {
                 final String PostKey = getRef(position).getKey();
 
                 viewHolder.setUsername(model.getUsername());
@@ -168,9 +98,9 @@ public class HomeFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
                         Intent clickPostIntent = new Intent();
-                        clickPostIntent.setClass(getActivity(), ClickPostActivity.class);
+                        clickPostIntent.setClass(PersonalPost.this, ClickPostActivity.class);
                         clickPostIntent.putExtra("PostKey", PostKey);
-                        getActivity().startActivity(clickPostIntent);
+                        startActivity(clickPostIntent);
                     }
                 });
 
@@ -178,9 +108,9 @@ public class HomeFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
                         Intent commentsIntent = new Intent();
-                        commentsIntent.setClass(getActivity(), CommentsActivity.class);
+                        commentsIntent.setClass(PersonalPost.this, CommentsActivity.class);
                         commentsIntent.putExtra("PostKey", PostKey);
-                        getActivity().startActivity(commentsIntent);
+                        startActivity(commentsIntent);
                     }
                 });
                 viewHolder.LikeButton.setOnClickListener(new View.OnClickListener() {
@@ -218,7 +148,7 @@ public class HomeFragment extends Fragment {
             }
         };
         adapter.startListening();
-        postList.setAdapter(adapter);
+        postList2.setAdapter(adapter);
     }
 
     public static class PostsViewHolder extends RecyclerView.ViewHolder {
@@ -267,7 +197,6 @@ public class HomeFragment extends Fragment {
             });
         }
 
-
         public void setUsername(String username) {
             TextView userName = (TextView) mView.findViewById(R.id.post_profile_username);
             userName.setText("@" + username);
@@ -312,7 +241,7 @@ public class HomeFragment extends Fragment {
             }
         }
 
-
     }
+
 
 }

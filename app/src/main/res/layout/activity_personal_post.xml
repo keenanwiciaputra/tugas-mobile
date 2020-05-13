@@ -3,17 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeFragment"
+    tools:context=".PersonalPost"
+    android:background="@color/backgroundDark"
     >
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/all_users_post_list"
+        android:id="@+id/all_users_post_list2"
         android:scrollbars="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingBottom="150px">
-
-
+        android:layout_height="match_parent">
     </androidx.recyclerview.widget.RecyclerView>
 
 </FrameLayout>

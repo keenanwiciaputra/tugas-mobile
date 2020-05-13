@@ -42,7 +42,6 @@ public class FriendsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friends);
 
-
         mAUth = FirebaseAuth.getInstance();
         online_user_id = mAUth.getCurrentUser().getUid();
         friendsRef = FirebaseDatabase.getInstance().getReference().child("Friends").child(online_user_id);

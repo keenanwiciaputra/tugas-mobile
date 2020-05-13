@@ -100,7 +100,7 @@ public class LoginActivity extends AppCompatActivity {
                             {
                                 SendUserToMainActivity();
 
-                                Toast.makeText(LoginActivity.this, "Register successful!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
                                 loadingBar.dismiss();
                             }
                             else

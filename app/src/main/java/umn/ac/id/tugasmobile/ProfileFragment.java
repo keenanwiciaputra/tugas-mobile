@@ -38,7 +38,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     private Button btnLogout;
     private Button btnEditProfile;
 
-    private TextView username, fullname, desc, location, join,countFriends,countPosts;
+    private TextView username, fullname, desc, location, join,countFriends,countPosts, tvPosts;
     private CircleImageView profilepic;
 
     private DatabaseReference profileUserRef,friendsRef,postsRef;
@@ -103,6 +103,16 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         location = (TextView) v.findViewById(R.id.tvUserLocationP);
         join = (TextView) v.findViewById(R.id.tvJoinP);
         profilepic = (CircleImageView) v.findViewById(R.id.ProfileImage);
+        tvPosts = v.findViewById(R.id.tvPosts);
+
+        tvPosts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent personalPost= new Intent();
+                personalPost.setClass(getActivity(), PersonalPost.class);
+                getActivity().startActivity(personalPost);
+            }
+        });
 
         profileUserRef.addValueEventListener(new ValueEventListener() {
             @Override

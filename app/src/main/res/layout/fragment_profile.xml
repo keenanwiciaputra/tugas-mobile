@@ -8,9 +8,13 @@
     tools:context=".NotificationFragment">
 
     <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <RelativeLayout
         android:id="@+id/scrollProfile"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <RelativeLayout
             android:id="@+id/userHeadline"
@@ -226,29 +230,16 @@
 
         </RelativeLayout>
 
-
-
+    </RelativeLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/all_users_post_list2"
+            android:scrollbars="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/scrollProfile"
+            android:paddingBottom="150px">
+        </androidx.recyclerview.widget.RecyclerView>
     </RelativeLayout>
 
+
 </FrameLayout>
-
-
-
-
-
-    <!--    <ImageView-->
-<!--        android:id="@+id/imageView"-->
-<!--        android:layout_width="200dp"-->
-<!--        android:layout_height="200dp"-->
-<!--        android:layout_gravity="center"-->
-<!--        android:src="@drawable/profile"-->
-<!--        />-->
-
-<!--    <Button-->
-<!--        android:id="@+id/btnLogout"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="40dp"-->
-<!--        android:background="@drawable/button1"-->
-<!--        android:textColor="#ffffff"-->
-<!--        android:text="LOGOUT"-->
-<!--        android:layout_marginTop="70dp"/>-->

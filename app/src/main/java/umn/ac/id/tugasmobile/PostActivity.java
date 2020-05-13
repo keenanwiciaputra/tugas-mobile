@@ -16,6 +16,7 @@ import android.graphics.BitmapFactory;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -121,6 +122,7 @@ public class PostActivity extends AppCompatActivity {
         openCamera = findViewById(R.id.openCamera);
         profilePicture = findViewById(R.id.post_profile);
         cancelPost = findViewById(R.id.cancelPost);
+
 
         //LOCATION PERMISSION
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
