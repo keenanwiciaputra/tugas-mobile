@@ -127,6 +127,7 @@ public class HomeFragment extends Fragment {
 //        adapter.stopListening();
 //    }
 
+    
     //
     private void DisplayAllUsersPosts()
     {
